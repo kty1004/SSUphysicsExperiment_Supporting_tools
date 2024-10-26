@@ -1,4 +1,4 @@
-from package.getting_data import get_all_csv_paths, read_csv_Tektronix
+from SSUphysicsTools.getting_data import get_all_csv_paths, read_csv_Tektronix
 import numpy as np
 from pandas import DataFrame
 from typing import Optional
