@@ -11,7 +11,26 @@ pip install SSUphysicsTools
 ## Example
 먼저 terminal에서 다음과 같이 실행하세요.
 ```zsh
-
+git clone --no-checkout https://github.com/kty1004/SSUphysicsExperiment_Supporting_tools.git
+cd SSUphysicsExperiment_Supporting_tools
+git sparse-checkout init --cone
+git sparse-checkout set examples
+rm README.md setup.py
+cd examples
+```
+이후 `code .`을 사용하여 vscode를 실행하거나, `jupyter notebook`을 사용하여 jupyter notebook을 실행하세요.
+### required packages to run examples
+예제를 실행하기 위해서는 다음과 같은 패키지들이 설치되어 있어야 합니다.
+- numpy
+- pandas
+- matplotlib
+- scipy
+- SSUphysicsTools
+- jupyter notebook (optional)
+- scikit-learn
+이를 위해 다음의 명령어를 실행하세요.
+```zsh
+pip install numpy pandas matplotlib scipy SSUphysicsTools jupyter scikit-learn
 ```
 
 ## How to use
