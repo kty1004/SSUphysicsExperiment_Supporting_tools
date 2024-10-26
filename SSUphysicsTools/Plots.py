@@ -12,12 +12,6 @@ class Plots(get_all_csv_paths):
         '''
         super().__init__(flatten=flatten,directory=directory)
         self.plot_name = plot_name
-        
-        # plot 이미지를 저장할 디렉토리 생성
-        directory = 'fig'
-        # 디렉토리가 없으면 생성
-        if not os.path.exists(directory):
-            os.makedirs(directory)
     
     # plots
     def orginal_data_plots(self, is_save:Optional[bool]=False,dpi:Optional[int]=300):

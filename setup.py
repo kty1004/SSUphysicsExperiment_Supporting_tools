@@ -22,4 +22,8 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.13.0',
+    test_require=[
+        "pytest"
+    ],
+    test_suite='tests',
 )
