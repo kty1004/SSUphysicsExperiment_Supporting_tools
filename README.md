@@ -8,14 +8,39 @@
 pip install SSUphysicsTools
 ```
 
+## Example
+먼저 terminal에서 다음과 같이 실행하세요.
+```zsh
+
+```
+
 ## How to use
+### Setting up
+실험 데이터는 data 폴더에 저장되어 있어야 합니다. 이 때 data 폴더는 다음과 같은 구조를 가지고 있어야 합니다.
+```
+data
+├── 1
+│   ├── 1.csv
+│   ├── 2.csv
+│   └── ...
+├── 2
+│   ├── 1.csv
+│   ├── 2.csv
+│   └── ...
+└── ...
+
+혹은
+
+data
+├── 1.csv
+├── 2.csv
+└── ...
+```
+만약 data 폴더가 준비되지 않았더면, 자동으로 data 폴더를 생성하고 `DataDirectoryEmptyError`를 발생시켜 data 폴더에 실험 데이터를 넣도록 알려줍니다.
+
 ### getting data
-getting_data.py 파일을 이용하여 실험 데이터를 가져올 수 있습니다.
-- pairwise_to_2d_list
-- get_sorted_folders_dir_by_number
-- get_channel_csv_files
-- read_csv_Tektronix
-- get_all_csv_paths
+get_all_csv_paths method를 이용하여 실험 데이터를 가져올 수 있습니다.
+
 ### processing data
 - Regression
     - cosine_regression
