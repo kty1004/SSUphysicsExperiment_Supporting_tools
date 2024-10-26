@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Optional
-from pandas import DataFrame, Series
+from pandas import Series
 
 class Phase_shift:
     def __init__(self, ch1_data:Series|np.ndarray, ch2_data:Series|np.ndarray):

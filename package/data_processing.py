@@ -1,25 +1,25 @@
 from scipy.optimize import curve_fit
 import numpy as np
-from typing import Optional
-from pandas import DataFrame, Series
+from typing import Callable, Optional
+from pandas import DataFrame
 
 # regression
 class Regression:
     @staticmethod
-    def cosine_regression(x_data, y_data, freq:Optional[str]=None)->dict:
+    def cosine_regression(x_data:np.ndarray, y_data:np.ndarray, freq:Optional[str]=None)->dict:
         pure_model=lambda x,A,f,phi,offset: A*np.cos(2*np.pi*f*x+phi)+offset
 
         if freq: # freq is given
-            freq_model=lambda x,A,phi,offset: pure_model(x,A,freq,phi,offset)
+            freq_model:Callable=lambda x,A,phi,offset: pure_model(x,A,freq,phi,offset)
             freq_parms, _ = curve_fit(freq_model, x_data, y_data)
-            fitted_func= lambda x: freq_model(x, *freq_parms)
-            result={'fitted_func':fitted_func,'parms':freq_parms}
+            fitted_func:Callable= lambda x: freq_model(x, *freq_parms)
+            result:dict={'fitted_func':fitted_func,'parms':freq_parms}
             return result
         
         # freq is not given
         parms, _ = curve_fit(pure_model, x_data, y_data, maxfev=10000)
-        fitted_func= lambda x: pure_model(x, *parms)
-        result={'fitted_func':fitted_func,'parms':parms}
+        fitted_func:callable= lambda x: pure_model(x, *parms)
+        result:dict={'fitted_func':fitted_func,'parms':parms}
         return result
 
 class Delate_offset(Regression):
