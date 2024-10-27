@@ -38,19 +38,12 @@ pip install numpy pandas matplotlib scipy SSUphysicsTools jupyter scikit-learn
 실험 데이터는 data 폴더에 저장되어 있어야 합니다. 이 때 data 폴더는 다음과 같은 구조를 가지고 있어야 합니다.
 ```
 data
-├── 1
+├── experiment 1
 │   ├── 1.csv
 │   ├── 2.csv
-├── 2
+├── experiment 2
 │   ├── 1.csv
 │   ├── 2.csv
-└── ...
-
-혹은
-
-data
-├── 1.csv
-├── 2.csv
 └── ...
 ```
 만약 data 폴더가 준비되지 않았더면, 자동으로 data 폴더를 생성하고 `DataDirectoryEmptyError`를 발생시켜 data 폴더에 실험 데이터를 넣도록 알려줍니다.
