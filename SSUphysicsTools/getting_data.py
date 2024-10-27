@@ -101,7 +101,7 @@ class get_all_subdirs_in_dir:
     
     def get_all_directories(self) -> list[str]:
         """
-        주어진 디렉토리 내의 모든 디렉토리 이름을 출력합니다.
+        주어진 디렉토리 내의 모든 sub디렉토리 경로를 출력합니다.
         :param directory: str, 디렉토리 경로
         """
         directory=self.directory
@@ -110,8 +110,8 @@ class get_all_subdirs_in_dir:
         # 각 항목이 디렉토리인지 확인하고, 디렉토리인 항목의 이름을 출력
         for item in items:
             if os.path.isdir(os.path.join(directory, item)):
-                results.append(item)
-                return results
+                results.append(f'{directory}/{item}')
+        return results
 
 class get_all_csv_paths_in_data(get_all_subdirs_in_dir):
     def __init__(self, flatten:Optional[bool]=False, custom_dir_name:Optional[bool]=False):
