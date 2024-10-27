@@ -75,7 +75,7 @@ class Phase_shift:
 
     def __call__(self):
         '''
-        Find the phase shift between ch1 and ch2.
+        Find the phase shift(radian) between ch1 and ch2.
         '''
         ym_y0=self.ym_y0
         ym=ym_y0['ym']
