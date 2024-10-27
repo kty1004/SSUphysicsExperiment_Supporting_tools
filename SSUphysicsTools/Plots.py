@@ -1,11 +1,11 @@
-from SSUphysicsTools.getting_data import get_all_csv_paths, read_csv_Tektronix
+from SSUphysicsTools.getting_data import get_all_csv_paths_in_data, read_csv_Tektronix
 import numpy as np
 from pandas import DataFrame
 from typing import Optional
 import matplotlib.pyplot as plt
 import os
 
-class Plots(get_all_csv_paths):
+class Plots(get_all_csv_paths_in_data):
     def __init__(self,plot_name:tuple[str], flatten:Optional[bool]=False,directory:Optional[str]='data'):
         '''
         :param plot_name: tuple[str], the name of the plots.
