@@ -70,6 +70,8 @@ class DataPlots(get_all_csv_paths_in_data):
             plt.plot(data1['Voltage'], data2['Voltage'])
             plt.xlabel('CH1 Voltage (V)')
             plt.ylabel('CH2 Voltage (V)')
+            plt.axhline(y=0, color='gray', zorder=-1)
+            plt.axvline(x=0, color='gray', zorder=-1)
             plt.title(f'{plot_name[i]}')
             plt.show()
             plt.close()
