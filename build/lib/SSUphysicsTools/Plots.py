@@ -55,7 +55,24 @@ class DataPlots(get_all_csv_paths_in_data):
                 plt.savefig(f'fig/{plot_name[i]}.png',dpi=dpi)
             plt.show()
             plt.close()
-            
+    
+    def Lissajous_plots(self):
+        '''
+        Tektronix oscilloscope에서 생성된 데이터를 Lissajous plot으로 시각화합니다.
+        '''
+        plot_name=self.plot_name
+        all_csv_list=self.all_csv_list
+
+        for i,csv_list in enumerate(all_csv_list):
+            results = np.array([read_csv_Tektronix(csv_list[0]),read_csv_Tektronix(csv_list[1])])
+            data1=results[0]['data']
+            data2=results[1]['data']
+            plt.plot(data1['Voltage'], data2['Voltage'])
+            plt.xlabel('CH1 Voltage (V)')
+            plt.ylabel('CH2 Voltage (V)')
+            plt.title(f'{plot_name[i]}')
+            plt.show()
+            plt.close()
     
     def bode_plots(self):
         assert self.flatten==False, 'The flatten should be False to use bode_plots method.'
