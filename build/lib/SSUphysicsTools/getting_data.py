@@ -1,3 +1,4 @@
+from ast import Global
 import pandas as pd
 from pandas import DataFrame
 from typing import Optional
@@ -94,32 +95,47 @@ def read_csv_Tektronix(file_path:str,columns_name:Optional[str]=['Time', 'Voltag
     return result
 
 class get_all_csv_paths:
-    def __init__(self, directory:Optional[str]='data', flatten:Optional[bool]=False):
+    def __init__(self, flatten:Optional[bool]=False, custom_dir_name:Optional[list[str]]=None):
         '''
-        :param directory: str, the path of the data directory.
-        :param flatten: bool, if True, return a 1D array. If you want to know more details, please refer to the get_all_csv_paths method.
+        :param flatten: bool, 만약 True이면, 실험 번호대로 시험 데이터를 묶는 게 아닌(2차원 배열), 1차원 배열로 변환합니다.
+        :param custom_dir_name: Optional[list[str]], 실험 데이터 내의 폴더 이름들을 설정합니다. 예를 들어, ['data1', 'data2']로 설정하면, data1, data2 폴더 내의 데이터만 가져옵니다. 만약 None이면, 모든 실험 순서대로 데이터를 가져옵니다.
         '''
-        self.directory = directory
+        self.directory = 'data'
         self.flatten = flatten
+        self.custom_dir_name = custom_dir_name
         self.all_csv_list = self.__call__()
 
-    def __call__(self)->np.ndarray:
+    def __rough_get_all_csv_paths(self, experi_dir:list)->np.ndarray:
         '''
-        Get all the csv files in the directory.
-        :return: np.ndarray, the list of the csv files.
-        '''
-        directory=self.directory
-        flatten=self.flatten
+        flatten이나 custom_dir_name을 고려하지 않고, 모든 csv 파일을 가져옵니다.
 
-        experi_dir= get_sorted_folders_dir_by_number(directory)
-        all_csv_list = []
+        > 코드 가독성을 위해 본 함수를 만들었기에 private 함수로 만들었습니다.
+        '''
+        rough_all_csv_list = []
         # get all the csv files in the directory
         for dir in experi_dir:
             temp_list=[get_channel_csv_files(dir)['CH1'][0],get_channel_csv_files(dir)['CH2'][0]]
             csv_list=temp_list
-            all_csv_list.append(csv_list)
-        all_csv_list=np.array(all_csv_list)
+            rough_all_csv_list.append(csv_list)
+        rough_all_csv_list:np.ndarray=np.array(rough_all_csv_list)
+        return rough_all_csv_list
+
+    def __call__(self)->np.ndarray:
+        '''
+        주어진 조건에 따라 모든 csv 파일을 가져옵니다.
+        :return: np.ndarray, the list of the csv files.
+        '''
+        directory=self.directory
+        flatten=self.flatten
+        custom_dir_name=self.custom_dir_name
+        experi_dir= get_sorted_folders_dir_by_number(directory)
+        if custom_dir_name is not None:
+            # no custom_dir_name
+            experi_dir=custom_dir_name
+
+        all_csv_list=self.__rough_get_all_csv_paths(experi_dir)
+
+        # flatten
         if flatten:
-            return all_csv_list.flatten()
-        else:
-            return all_csv_list
+            all_csv_list=all_csv_list.flatten()
+        return all_csv_list
