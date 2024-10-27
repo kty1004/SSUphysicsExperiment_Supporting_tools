@@ -28,7 +28,7 @@ data
 만약 data 폴더가 준비되지 않았더면, 자동으로 data 폴더를 생성하고 `DataDirectoryEmptyError`를 발생시켜 data 폴더에 실험 데이터를 넣도록 알려줍니다.
 
 ### getting data
-get_all_csv_paths method를 이용하여 실험 데이터를 가져올 수 있습니다.
+`get_all_csv_paths_in_data`를 이용하여 실험 데이터를 가져올 수 있습니다.
 
 ### processing data
 - Regression
@@ -40,7 +40,7 @@ get_all_csv_paths method를 이용하여 실험 데이터를 가져올 수 있�
     - find_ym_y0
 - get_error_rate
 ### plot
-- Plots
-    - rough data plot
-    - bode plot
+- DataPlots
+    - data_plots
+    - Lissajous_plots
 - plot_table
